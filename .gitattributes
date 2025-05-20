@@ -1,0 +1,4 @@
+# Not enough space for this yet
+# *.tfrecord filter=lfs diff=lfs merge=lfs -text
+
+*.tfrecord
