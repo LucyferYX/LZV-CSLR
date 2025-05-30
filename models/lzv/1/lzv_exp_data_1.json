@@ -1,0 +1,2614 @@
+{
+    "experiment_type": "Fine-tuning LZV",
+    "base_asl_model_path": "c:\\Users\\liene\\Documents\\GitHub\\LZV-CSLR\\models\\asl\\42\\cslr_model_best_42.keras",
+    "experiment_index": 1,
+    "timestamp_completed_utc": "2025-05-30T15:31:16+00:00",
+    "dataset_info": {
+        "name": "LZV",
+        "training_samples_final_filtered": 254,
+        "validation_samples_final_filtered": 64,
+        "total_classes_lzv_excl_blank": 45,
+        "total_classes_lzv_incl_blank": 46,
+        "char_map_file": "data\\processed_landmarks\\char_map.json",
+        "train_tfrecord": "training.tfrecord",
+        "val_tfrecord": "validation.tfrecord"
+    },
+    "landmark_info": {
+        "source": "MediaPipe Holistic",
+        "original_total_landmarks": 543,
+        "used_landmarks_count": 42,
+        "dimensions": 3
+    },
+    "preprocessing": {
+        "normalization_source": "calculated_on_the_spot",
+        "ctc_length_filter_applied": true
+    },
+    "augmentation_details": {
+        "enabled": true,
+        "spatial_affine": true,
+        "horizontal_flip": false,
+        "temporal_resample": true,
+        "temporal_mask": true
+    },
+    "model_architecture_fine_tuned": {
+        "config": {
+            "name": "cslr_lzv_fine_tune_training_model",
+            "trainable": true,
+            "layers": [
+                {
+                    "module": "keras.layers",
+                    "class_name": "InputLayer",
+                    "config": {
+                        "batch_shape": [
+                            null,
+                            null,
+                            42,
+                            3
+                        ],
+                        "dtype": "float32",
+                        "sparse": false,
+                        "name": "input_landmarks"
+                    },
+                    "registered_name": null,
+                    "name": "input_landmarks",
+                    "inbound_nodes": []
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "Reshape",
+                    "config": {
+                        "name": "reshape_input",
+                        "trainable": false,
+                        "dtype": {
+                            "module": "keras",
+                            "class_name": "DTypePolicy",
+                            "config": {
+                                "name": "float32"
+                            },
+                            "registered_name": null
+                        },
+                        "target_shape": [
+                            -1,
+                            126
+                        ]
+                    },
+                    "registered_name": null,
+                    "build_config": {
+                        "input_shape": [
+                            null,
+                            null,
+                            42,
+                            3
+                        ]
+                    },
+                    "name": "reshape_input",
+                    "inbound_nodes": [
+                        {
+                            "args": [
+                                {
+                                    "class_name": "__keras_tensor__",
+                                    "config": {
+                                        "shape": [
+                                            null,
+                                            null,
+                                            42,
+                                            3
+                                        ],
+                                        "dtype": "float32",
+                                        "keras_history": [
+                                            "input_landmarks",
+                                            0,
+                                            0
+                                        ]
+                                    }
+                                }
+                            ],
+                            "kwargs": {}
+                        }
+                    ]
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "Conv1D",
+                    "config": {
+                        "name": "conv1d_layer",
+                        "trainable": true,
+                        "dtype": {
+                            "module": "keras",
+                            "class_name": "DTypePolicy",
+                            "config": {
+                                "name": "float32"
+                            },
+                            "registered_name": null
+                        },
+                        "filters": 128,
+                        "kernel_size": [
+                            5
+                        ],
+                        "strides": [
+                            1
+                        ],
+                        "padding": "same",
+                        "data_format": "channels_last",
+                        "dilation_rate": [
+                            1
+                        ],
+                        "groups": 1,
+                        "activation": "relu",
+                        "use_bias": true,
+                        "kernel_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "GlorotUniform",
+                            "config": {
+                                "seed": null
+                            },
+                            "registered_name": null
+                        },
+                        "bias_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "Zeros",
+                            "config": {},
+                            "registered_name": null
+                        },
+                        "kernel_regularizer": null,
+                        "bias_regularizer": null,
+                        "activity_regularizer": null,
+                        "kernel_constraint": null,
+                        "bias_constraint": null
+                    },
+                    "registered_name": null,
+                    "build_config": {
+                        "input_shape": [
+                            null,
+                            null,
+                            126
+                        ]
+                    },
+                    "name": "conv1d_layer",
+                    "inbound_nodes": [
+                        {
+                            "args": [
+                                {
+                                    "class_name": "__keras_tensor__",
+                                    "config": {
+                                        "shape": [
+                                            null,
+                                            null,
+                                            126
+                                        ],
+                                        "dtype": "float32",
+                                        "keras_history": [
+                                            "reshape_input",
+                                            0,
+                                            0
+                                        ]
+                                    }
+                                }
+                            ],
+                            "kwargs": {}
+                        }
+                    ]
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "BatchNormalization",
+                    "config": {
+                        "name": "batchnorm_conv",
+                        "trainable": true,
+                        "dtype": {
+                            "module": "keras",
+                            "class_name": "DTypePolicy",
+                            "config": {
+                                "name": "float32"
+                            },
+                            "registered_name": null
+                        },
+                        "axis": -1,
+                        "momentum": 0.99,
+                        "epsilon": 0.001,
+                        "center": true,
+                        "scale": true,
+                        "beta_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "Zeros",
+                            "config": {},
+                            "registered_name": null
+                        },
+                        "gamma_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "Ones",
+                            "config": {},
+                            "registered_name": null
+                        },
+                        "moving_mean_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "Zeros",
+                            "config": {},
+                            "registered_name": null
+                        },
+                        "moving_variance_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "Ones",
+                            "config": {},
+                            "registered_name": null
+                        },
+                        "beta_regularizer": null,
+                        "gamma_regularizer": null,
+                        "beta_constraint": null,
+                        "gamma_constraint": null,
+                        "synchronized": false
+                    },
+                    "registered_name": null,
+                    "build_config": {
+                        "input_shape": [
+                            null,
+                            null,
+                            128
+                        ]
+                    },
+                    "name": "batchnorm_conv",
+                    "inbound_nodes": [
+                        {
+                            "args": [
+                                {
+                                    "class_name": "__keras_tensor__",
+                                    "config": {
+                                        "shape": [
+                                            null,
+                                            null,
+                                            128
+                                        ],
+                                        "dtype": "float32",
+                                        "keras_history": [
+                                            "conv1d_layer",
+                                            0,
+                                            0
+                                        ]
+                                    }
+                                }
+                            ],
+                            "kwargs": {
+                                "mask": null
+                            }
+                        }
+                    ]
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "Bidirectional",
+                    "config": {
+                        "name": "bilstm_1",
+                        "trainable": true,
+                        "dtype": {
+                            "module": "keras",
+                            "class_name": "DTypePolicy",
+                            "config": {
+                                "name": "float32"
+                            },
+                            "registered_name": null
+                        },
+                        "merge_mode": "concat",
+                        "layer": {
+                            "module": "keras.layers",
+                            "class_name": "LSTM",
+                            "config": {
+                                "name": "forward_lstm",
+                                "trainable": true,
+                                "dtype": {
+                                    "module": "keras",
+                                    "class_name": "DTypePolicy",
+                                    "config": {
+                                        "name": "float32"
+                                    },
+                                    "registered_name": null
+                                },
+                                "return_sequences": true,
+                                "return_state": false,
+                                "go_backwards": false,
+                                "stateful": false,
+                                "unroll": false,
+                                "zero_output_for_mask": true,
+                                "units": 64,
+                                "activation": "tanh",
+                                "recurrent_activation": "sigmoid",
+                                "use_bias": true,
+                                "kernel_initializer": {
+                                    "module": "keras.initializers",
+                                    "class_name": "GlorotUniform",
+                                    "config": {
+                                        "seed": null
+                                    },
+                                    "registered_name": null
+                                },
+                                "recurrent_initializer": {
+                                    "module": "keras.initializers",
+                                    "class_name": "OrthogonalInitializer",
+                                    "config": {
+                                        "seed": null,
+                                        "gain": 1.0
+                                    },
+                                    "registered_name": null
+                                },
+                                "bias_initializer": {
+                                    "module": "keras.initializers",
+                                    "class_name": "Zeros",
+                                    "config": {},
+                                    "registered_name": null
+                                },
+                                "unit_forget_bias": true,
+                                "kernel_regularizer": null,
+                                "recurrent_regularizer": null,
+                                "bias_regularizer": null,
+                                "activity_regularizer": null,
+                                "kernel_constraint": null,
+                                "recurrent_constraint": null,
+                                "bias_constraint": null,
+                                "dropout": 0.0,
+                                "recurrent_dropout": 0.0,
+                                "seed": null
+                            },
+                            "registered_name": null,
+                            "build_config": {
+                                "input_shape": [
+                                    null,
+                                    null,
+                                    128
+                                ]
+                            }
+                        },
+                        "backward_layer": {
+                            "module": "keras.layers",
+                            "class_name": "LSTM",
+                            "config": {
+                                "name": "backward_lstm",
+                                "trainable": true,
+                                "dtype": {
+                                    "module": "keras",
+                                    "class_name": "DTypePolicy",
+                                    "config": {
+                                        "name": "float32"
+                                    },
+                                    "registered_name": null
+                                },
+                                "return_sequences": true,
+                                "return_state": false,
+                                "go_backwards": true,
+                                "stateful": false,
+                                "unroll": false,
+                                "zero_output_for_mask": true,
+                                "units": 64,
+                                "activation": "tanh",
+                                "recurrent_activation": "sigmoid",
+                                "use_bias": true,
+                                "kernel_initializer": {
+                                    "module": "keras.initializers",
+                                    "class_name": "GlorotUniform",
+                                    "config": {
+                                        "seed": null
+                                    },
+                                    "registered_name": null
+                                },
+                                "recurrent_initializer": {
+                                    "module": "keras.initializers",
+                                    "class_name": "OrthogonalInitializer",
+                                    "config": {
+                                        "seed": null,
+                                        "gain": 1.0
+                                    },
+                                    "registered_name": null
+                                },
+                                "bias_initializer": {
+                                    "module": "keras.initializers",
+                                    "class_name": "Zeros",
+                                    "config": {},
+                                    "registered_name": null
+                                },
+                                "unit_forget_bias": true,
+                                "kernel_regularizer": null,
+                                "recurrent_regularizer": null,
+                                "bias_regularizer": null,
+                                "activity_regularizer": null,
+                                "kernel_constraint": null,
+                                "recurrent_constraint": null,
+                                "bias_constraint": null,
+                                "dropout": 0.0,
+                                "recurrent_dropout": 0.0,
+                                "seed": null
+                            },
+                            "registered_name": null,
+                            "build_config": {
+                                "input_shape": [
+                                    null,
+                                    null,
+                                    128
+                                ]
+                            }
+                        }
+                    },
+                    "registered_name": null,
+                    "build_config": {
+                        "input_shape": [
+                            null,
+                            null,
+                            128
+                        ]
+                    },
+                    "name": "bilstm_1",
+                    "inbound_nodes": [
+                        {
+                            "args": [
+                                {
+                                    "class_name": "__keras_tensor__",
+                                    "config": {
+                                        "shape": [
+                                            null,
+                                            null,
+                                            128
+                                        ],
+                                        "dtype": "float32",
+                                        "keras_history": [
+                                            "batchnorm_conv",
+                                            0,
+                                            0
+                                        ]
+                                    }
+                                }
+                            ],
+                            "kwargs": {
+                                "mask": null
+                            }
+                        }
+                    ]
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "BatchNormalization",
+                    "config": {
+                        "name": "batchnorm_lstm1",
+                        "trainable": true,
+                        "dtype": {
+                            "module": "keras",
+                            "class_name": "DTypePolicy",
+                            "config": {
+                                "name": "float32"
+                            },
+                            "registered_name": null
+                        },
+                        "axis": -1,
+                        "momentum": 0.99,
+                        "epsilon": 0.001,
+                        "center": true,
+                        "scale": true,
+                        "beta_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "Zeros",
+                            "config": {},
+                            "registered_name": null
+                        },
+                        "gamma_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "Ones",
+                            "config": {},
+                            "registered_name": null
+                        },
+                        "moving_mean_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "Zeros",
+                            "config": {},
+                            "registered_name": null
+                        },
+                        "moving_variance_initializer": {
+                            "module": "keras.initializers",
+                            "class_name": "Ones",
+                            "config": {},
+                            "registered_name": null
+                        },
+                        "beta_regularizer": null,
+                        "gamma_regularizer": null,
+                        "beta_constraint": null,
+                        "gamma_constraint": null,
+                        "synchronized": false
+                    },
+                    "registered_name": null,
+                    "build_config": {
+                        "input_shape": [
+                            null,
+                            null,
+                            128
+                        ]
+                    },
+                    "name": "batchnorm_lstm1",
+                    "inbound_nodes": [
+                        {
+                            "args": [
+                                {
+                                    "class_name": "__keras_tensor__",
+                                    "config": {
+                                        "shape": [
+                                            null,
+                                            null,
+                                            128
+                                        ],
+                                        "dtype": "float32",
+                                        "keras_history": [
+                                            "bilstm_1",
+                                            0,
+                                            0
+                                        ]
+                                    }
+                                }
+                            ],
+                            "kwargs": {
+                                "mask": null
+                            }
+                        }
+                    ]
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "InputLayer",
+                    "config": {
+                        "batch_shape": [
+                            null,
+                            1
+                        ],
+                        "dtype": "int64",
+                        "sparse": false,
+                        "name": "input_landmark_length_lzv"
+                    },
+                    "registered_name": null,
+                    "name": "input_landmark_length_lzv",
+                    "inbound_nodes": []
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "InputLayer",
+                    "config": {
+                        "batch_shape": [
+                            null,
+                            1
+                        ],
+                        "dtype": "int64",
+                        "sparse": false,
+                        "name": "input_label_length_lzv"
+                    },
+                    "registered_name": null,
+                    "name": "input_label_length_lzv",
+                    "inbound_nodes": []
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "InputLayer",
+                    "config": {
+                        "batch_shape": [
+                            null,
+                            null
+                        ],
+                        "dtype": "int64",
+                        "sparse": false,
+                        "name": "input_labels_lzv"
+                    },
+                    "registered_name": null,
+                    "name": "input_labels_lzv",
+                    "inbound_nodes": []
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "TimeDistributed",
+                    "config": {
+                        "name": "output_dense_softmax_lzv",
+                        "trainable": true,
+                        "dtype": {
+                            "module": "keras",
+                            "class_name": "DTypePolicy",
+                            "config": {
+                                "name": "float32"
+                            },
+                            "registered_name": null
+                        },
+                        "layer": {
+                            "module": "keras.layers",
+                            "class_name": "Dense",
+                            "config": {
+                                "name": "dense_1",
+                                "trainable": true,
+                                "dtype": {
+                                    "module": "keras",
+                                    "class_name": "DTypePolicy",
+                                    "config": {
+                                        "name": "float32"
+                                    },
+                                    "registered_name": null
+                                },
+                                "units": 46,
+                                "activation": "softmax",
+                                "use_bias": true,
+                                "kernel_initializer": {
+                                    "module": "keras.initializers",
+                                    "class_name": "GlorotUniform",
+                                    "config": {
+                                        "seed": null
+                                    },
+                                    "registered_name": null
+                                },
+                                "bias_initializer": {
+                                    "module": "keras.initializers",
+                                    "class_name": "Zeros",
+                                    "config": {},
+                                    "registered_name": null
+                                },
+                                "kernel_regularizer": null,
+                                "bias_regularizer": null,
+                                "kernel_constraint": null,
+                                "bias_constraint": null
+                            },
+                            "registered_name": null,
+                            "build_config": {
+                                "input_shape": [
+                                    null,
+                                    128
+                                ]
+                            }
+                        }
+                    },
+                    "registered_name": null,
+                    "build_config": {
+                        "input_shape": [
+                            null,
+                            null,
+                            128
+                        ]
+                    },
+                    "name": "output_dense_softmax_lzv",
+                    "inbound_nodes": [
+                        {
+                            "args": [
+                                {
+                                    "class_name": "__keras_tensor__",
+                                    "config": {
+                                        "shape": [
+                                            null,
+                                            null,
+                                            128
+                                        ],
+                                        "dtype": "float32",
+                                        "keras_history": [
+                                            "batchnorm_lstm1",
+                                            0,
+                                            0
+                                        ]
+                                    }
+                                }
+                            ],
+                            "kwargs": {
+                                "mask": null
+                            }
+                        }
+                    ]
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "Lambda",
+                    "config": {
+                        "name": "squeeze_lm_len_lzv",
+                        "trainable": true,
+                        "dtype": {
+                            "module": "keras",
+                            "class_name": "DTypePolicy",
+                            "config": {
+                                "name": "float32"
+                            },
+                            "registered_name": null
+                        },
+                        "function": {
+                            "class_name": "__lambda__",
+                            "config": {
+                                "code": "4wEAAAAAAAAAAAAAAAQAAAATAAAA8zoAAACXAHQAAAAAAAAAAAAAAKABAAAAAAAAAAAAAAAAAAAA\nAAAAAAB8AGQBrAKmAgAAqwIAAAAAAAAAAFMAqQNO6f////+pAdoEYXhpc6kC2gJ0ZtoHc3F1ZWV6\nZakB2gF0cwEAAAAg+j9DOi9Vc2Vycy9saWVuZS9BcHBEYXRhL0xvY2FsL1RlbXAvaXB5a2VybmVs\nXzIzODEyLzE4MjQ4MzMwNzkucHn6CDxsYW1iZGE++ixidWlsZF9jc2xyX2ZpbmVfdHVuZV9tb2Rl\nbC48bG9jYWxzPi48bGFtYmRhPmsAAABzFgAAAIAAvTK/Oro6wGHIYrg60TtR1DtRgADzAAAAAA==\n",
+                                "defaults": null,
+                                "closure": null
+                            }
+                        },
+                        "arguments": {}
+                    },
+                    "registered_name": null,
+                    "build_config": {
+                        "input_shape": [
+                            null,
+                            1
+                        ]
+                    },
+                    "name": "squeeze_lm_len_lzv",
+                    "inbound_nodes": [
+                        {
+                            "args": [
+                                {
+                                    "class_name": "__keras_tensor__",
+                                    "config": {
+                                        "shape": [
+                                            null,
+                                            1
+                                        ],
+                                        "dtype": "int64",
+                                        "keras_history": [
+                                            "input_landmark_length_lzv",
+                                            0,
+                                            0
+                                        ]
+                                    }
+                                }
+                            ],
+                            "kwargs": {
+                                "mask": null
+                            }
+                        }
+                    ]
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "Lambda",
+                    "config": {
+                        "name": "squeeze_ph_len_lzv",
+                        "trainable": true,
+                        "dtype": {
+                            "module": "keras",
+                            "class_name": "DTypePolicy",
+                            "config": {
+                                "name": "float32"
+                            },
+                            "registered_name": null
+                        },
+                        "function": {
+                            "class_name": "__lambda__",
+                            "config": {
+                                "code": "4wEAAAAAAAAAAAAAAAQAAAATAAAA8zoAAACXAHQAAAAAAAAAAAAAAKABAAAAAAAAAAAAAAAAAAAA\nAAAAAAB8AGQBrAKmAgAAqwIAAAAAAAAAAFMAqQNO6f////+pAdoEYXhpc6kC2gJ0ZtoHc3F1ZWV6\nZakB2gF0cwEAAAAg+j9DOi9Vc2Vycy9saWVuZS9BcHBEYXRhL0xvY2FsL1RlbXAvaXB5a2VybmVs\nXzIzODEyLzE4MjQ4MzMwNzkucHn6CDxsYW1iZGE++ixidWlsZF9jc2xyX2ZpbmVfdHVuZV9tb2Rl\nbC48bG9jYWxzPi48bGFtYmRhPmwAAABzFgAAAIAAvQK/CroKwDHIMrgK0ThO1DhOgADzAAAAAA==\n",
+                                "defaults": null,
+                                "closure": null
+                            }
+                        },
+                        "arguments": {}
+                    },
+                    "registered_name": null,
+                    "build_config": {
+                        "input_shape": [
+                            null,
+                            1
+                        ]
+                    },
+                    "name": "squeeze_ph_len_lzv",
+                    "inbound_nodes": [
+                        {
+                            "args": [
+                                {
+                                    "class_name": "__keras_tensor__",
+                                    "config": {
+                                        "shape": [
+                                            null,
+                                            1
+                                        ],
+                                        "dtype": "int64",
+                                        "keras_history": [
+                                            "input_label_length_lzv",
+                                            0,
+                                            0
+                                        ]
+                                    }
+                                }
+                            ],
+                            "kwargs": {
+                                "mask": null
+                            }
+                        }
+                    ]
+                },
+                {
+                    "module": "keras.layers",
+                    "class_name": "Lambda",
+                    "config": {
+                        "name": "ctc_loss_lzv",
+                        "trainable": true,
+                        "dtype": {
+                            "module": "keras",
+                            "class_name": "DTypePolicy",
+                            "config": {
+                                "name": "float32"
+                            },
+                            "registered_name": null
+                        },
+                        "function": {
+                            "class_name": "__lambda__",
+                            "config": {
+                                "code": "4wEAAAAAAAAAAAAAAAkAAAATAAAA8+oAAACXAHQAAAAAAAAAAAAAAGoBAAAAAAAAAABqAgAAAAAA\nAAAAoAMAAAAAAAAAAAAAAAAAAAAAAAAAAHwAZAEZAAAAAAAAAAAAfABkAhkAAAAAAAAAAAB0AAAA\nAAAAAAAAAACgBAAAAAAAAAAAAAAAAAAAAAAAAAAAfABkAxkAAAAAAAAAAABkBKwFpgIAAKsCAAAA\nAAAAAAB0AAAAAAAAAAAAAACgBAAAAAAAAAAAAAAAAAAAAAAAAAAAfABkBhkAAAAAAAAAAABkBKwF\npgIAAKsCAAAAAAAAAACsB6YEAACrBAAAAAAAAAAAUwApCE7pAAAAAOkBAAAA6QIAAADp/////6kB\n2gRheGlz6QMAAAApBNoGeV90cnVl2gZ5X3ByZWTaDGlucHV0X2xlbmd0aNoMbGFiZWxfbGVuZ3Ro\nKQXaAnRm2gVrZXJhc9oHYmFja2VuZNoOY3RjX2JhdGNoX2Nvc3TaC2V4cGFuZF9kaW1zKQHaBGFy\nZ3NzAQAAACD6P0M6L1VzZXJzL2xpZW5lL0FwcERhdGEvTG9jYWwvVGVtcC9pcHlrZXJuZWxfMjM4\nMTIvMTgyNDgzMzA3OS5wefoIPGxhbWJkYT76LGJ1aWxkX2NzbHJfZmluZV90dW5lX21vZGVsLjxs\nb2NhbHM+LjxsYW1iZGE+bwAAAHNeAAAAgACVUpRY1BUl1xU00hU02BMXmAGUN6A0qAGkN90ZG58e\nmh6oBKhRrAewYpge0Rk51Bk5zQLPDsoO0Fdb0C9d1Fde0GVnyA7RSGjUSGjwBQAWNfEAAxYK9AAD\nFgqAAPMAAAAA\n",
+                                "defaults": null,
+                                "closure": null
+                            }
+                        },
+                        "arguments": {}
+                    },
+                    "registered_name": null,
+                    "build_config": {
+                        "input_shape": [
+                            [
+                                null,
+                                null
+                            ],
+                            [
+                                null,
+                                null,
+                                46
+                            ],
+                            [
+                                null
+                            ],
+                            [
+                                null
+                            ]
+                        ]
+                    },
+                    "name": "ctc_loss_lzv",
+                    "inbound_nodes": [
+                        {
+                            "args": [
+                                [
+                                    {
+                                        "class_name": "__keras_tensor__",
+                                        "config": {
+                                            "shape": [
+                                                null,
+                                                null
+                                            ],
+                                            "dtype": "int64",
+                                            "keras_history": [
+                                                "input_labels_lzv",
+                                                0,
+                                                0
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "class_name": "__keras_tensor__",
+                                        "config": {
+                                            "shape": [
+                                                null,
+                                                null,
+                                                46
+                                            ],
+                                            "dtype": "float32",
+                                            "keras_history": [
+                                                "output_dense_softmax_lzv",
+                                                0,
+                                                0
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "class_name": "__keras_tensor__",
+                                        "config": {
+                                            "shape": [
+                                                null
+                                            ],
+                                            "dtype": "float32",
+                                            "keras_history": [
+                                                "squeeze_lm_len_lzv",
+                                                0,
+                                                0
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "class_name": "__keras_tensor__",
+                                        "config": {
+                                            "shape": [
+                                                null
+                                            ],
+                                            "dtype": "float32",
+                                            "keras_history": [
+                                                "squeeze_ph_len_lzv",
+                                                0,
+                                                0
+                                            ]
+                                        }
+                                    }
+                                ]
+                            ],
+                            "kwargs": {
+                                "mask": [
+                                    null,
+                                    null,
+                                    null,
+                                    null
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "input_layers": {
+                "input_landmarks": [
+                    "input_landmarks",
+                    0,
+                    0
+                ],
+                "input_labels": [
+                    "input_labels_lzv",
+                    0,
+                    0
+                ],
+                "input_landmark_length": [
+                    "input_landmark_length_lzv",
+                    0,
+                    0
+                ],
+                "input_label_length": [
+                    "input_label_length_lzv",
+                    0,
+                    0
+                ]
+            },
+            "output_layers": [
+                [
+                    "ctc_loss_lzv",
+                    0,
+                    0
+                ]
+            ]
+        },
+        "params_total": 186542,
+        "params_trainable": 186030
+    },
+    "results": {
+        "best_val_wer_overall": 0.20666666666666667,
+        "best_val_wer_epoch_overall": 70,
+        "final_train_loss": 2.004436731338501,
+        "final_val_wer": 0.21666666666666667,
+        "epoch_metrics": [
+            {
+                "epoch": 1,
+                "loss": 206.20648193359375,
+                "val_loss": 26.54610824584961,
+                "val_wer": 1.52,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 2,
+                "loss": 34.10596466064453,
+                "val_loss": 15.602439880371094,
+                "val_wer": 1.3566666666666667,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 3,
+                "loss": 24.33619499206543,
+                "val_loss": 10.465883255004883,
+                "val_wer": 2.3733333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 4,
+                "loss": 19.343950271606445,
+                "val_loss": 8.105584144592285,
+                "val_wer": 2.1433333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 5,
+                "loss": 13.173686027526855,
+                "val_loss": 7.240564346313477,
+                "val_wer": 1.8233333333333333,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 6,
+                "loss": 11.042464256286621,
+                "val_loss": 6.450219631195068,
+                "val_wer": 1.02,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 7,
+                "loss": 9.674126625061035,
+                "val_loss": 5.698976516723633,
+                "val_wer": 0.8633333333333333,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 8,
+                "loss": 8.771221160888672,
+                "val_loss": 5.446804046630859,
+                "val_wer": 0.8233333333333334,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 9,
+                "loss": 7.1685662269592285,
+                "val_loss": 5.654796600341797,
+                "val_wer": 0.8633333333333333,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 10,
+                "loss": 6.703371047973633,
+                "val_loss": 5.305193901062012,
+                "val_wer": 0.6266666666666667,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 11,
+                "loss": 6.120894908905029,
+                "val_loss": 5.412588119506836,
+                "val_wer": 0.54,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 12,
+                "loss": 5.942758083343506,
+                "val_loss": 5.174802303314209,
+                "val_wer": 0.4666666666666667,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 13,
+                "loss": 5.186604976654053,
+                "val_loss": 5.481748104095459,
+                "val_wer": 0.41,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 14,
+                "loss": 4.853175640106201,
+                "val_loss": 5.052728652954102,
+                "val_wer": 0.5,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 15,
+                "loss": 4.819790363311768,
+                "val_loss": 5.6814775466918945,
+                "val_wer": 0.37666666666666665,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 16,
+                "loss": 4.3741679191589355,
+                "val_loss": 4.822079658508301,
+                "val_wer": 0.58,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 17,
+                "loss": 4.304736137390137,
+                "val_loss": 5.341893196105957,
+                "val_wer": 0.35,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 18,
+                "loss": 4.056751251220703,
+                "val_loss": 5.502028942108154,
+                "val_wer": 0.4633333333333333,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 19,
+                "loss": 4.121574878692627,
+                "val_loss": 5.735354900360107,
+                "val_wer": 0.2966666666666667,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 20,
+                "loss": 3.7452774047851562,
+                "val_loss": 5.343857765197754,
+                "val_wer": 2.92,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 21,
+                "loss": 3.3568735122680664,
+                "val_loss": 4.8929877281188965,
+                "val_wer": 0.29,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 22,
+                "loss": 3.181058406829834,
+                "val_loss": 5.046799659729004,
+                "val_wer": 0.2866666666666667,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 23,
+                "loss": 3.0942695140838623,
+                "val_loss": 5.149197101593018,
+                "val_wer": 0.2866666666666667,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 24,
+                "loss": 2.976198196411133,
+                "val_loss": 5.064435958862305,
+                "val_wer": 0.25333333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 25,
+                "loss": 2.7827887535095215,
+                "val_loss": 5.003209590911865,
+                "val_wer": 0.26,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 26,
+                "loss": 2.7701001167297363,
+                "val_loss": 4.9690842628479,
+                "val_wer": 0.25666666666666665,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 27,
+                "loss": 2.894383668899536,
+                "val_loss": 4.9692816734313965,
+                "val_wer": 0.25333333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 28,
+                "loss": 2.648350477218628,
+                "val_loss": 4.969820499420166,
+                "val_wer": 0.24333333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 29,
+                "loss": 2.5926449298858643,
+                "val_loss": 4.929688453674316,
+                "val_wer": 0.25333333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 30,
+                "loss": 2.8468525409698486,
+                "val_loss": 4.97042989730835,
+                "val_wer": 0.27,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 31,
+                "loss": 2.6271915435791016,
+                "val_loss": 4.9832563400268555,
+                "val_wer": 0.25333333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 32,
+                "loss": 2.452608823776245,
+                "val_loss": 4.9857635498046875,
+                "val_wer": 0.22,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 33,
+                "loss": 2.3159427642822266,
+                "val_loss": 4.941298007965088,
+                "val_wer": 0.24333333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 34,
+                "loss": 2.387188673019409,
+                "val_loss": 4.935210704803467,
+                "val_wer": 0.25,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 35,
+                "loss": 2.489093065261841,
+                "val_loss": 4.945798397064209,
+                "val_wer": 0.24333333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 36,
+                "loss": 1.970621943473816,
+                "val_loss": 4.965644836425781,
+                "val_wer": 0.23666666666666666,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 37,
+                "loss": 2.0265345573425293,
+                "val_loss": 4.924252986907959,
+                "val_wer": 0.24333333333333335,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 38,
+                "loss": 1.9878968000411987,
+                "val_loss": 4.934693336486816,
+                "val_wer": 0.24,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 39,
+                "loss": 2.2693676948547363,
+                "val_loss": 4.94143009185791,
+                "val_wer": 0.22666666666666666,
+                "lr": 0.0010000000474974513
+            },
+            {
+                "epoch": 40,
+                "loss": 1.8009779453277588,
+                "val_loss": 4.960853099822998,
+                "val_wer": 0.23666666666666666,
+                "lr": 0.0003000000142492354
+            },
+            {
+                "epoch": 41,
+                "loss": 1.9474061727523804,
+                "val_loss": 4.954375267028809,
+                "val_wer": 0.22666666666666666,
+                "lr": 0.0003000000142492354
+            },
+            {
+                "epoch": 42,
+                "loss": 2.1159114837646484,
+                "val_loss": 4.9426589012146,
+                "val_wer": 0.24666666666666667,
+                "lr": 0.0003000000142492354
+            },
+            {
+                "epoch": 43,
+                "loss": 1.8123546838760376,
+                "val_loss": 4.954473495483398,
+                "val_wer": 0.24,
+                "lr": 0.0003000000142492354
+            },
+            {
+                "epoch": 44,
+                "loss": 1.7502700090408325,
+                "val_loss": 4.91982364654541,
+                "val_wer": 0.23666666666666666,
+                "lr": 0.0003000000142492354
+            },
+            {
+                "epoch": 45,
+                "loss": 1.8233662843704224,
+                "val_loss": 4.930367469787598,
+                "val_wer": 0.24,
+                "lr": 0.0003000000142492354
+            },
+            {
+                "epoch": 46,
+                "loss": 1.7463399171829224,
+                "val_loss": 4.964728355407715,
+                "val_wer": 0.23,
+                "lr": 0.0003000000142492354
+            },
+            {
+                "epoch": 47,
+                "loss": 2.0971505641937256,
+                "val_loss": 4.943946361541748,
+                "val_wer": 0.22666666666666666,
+                "lr": 9.000000136438757e-05
+            },
+            {
+                "epoch": 48,
+                "loss": 2.010704517364502,
+                "val_loss": 4.93200159072876,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 49,
+                "loss": 2.408869743347168,
+                "val_loss": 4.8996758460998535,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 50,
+                "loss": 2.14277982711792,
+                "val_loss": 4.886695861816406,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 51,
+                "loss": 2.224501132965088,
+                "val_loss": 4.962104797363281,
+                "val_wer": 0.22,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 52,
+                "loss": 1.9518166780471802,
+                "val_loss": 4.914669036865234,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 53,
+                "loss": 1.8818767070770264,
+                "val_loss": 4.888377666473389,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 54,
+                "loss": 1.720983624458313,
+                "val_loss": 4.903701305389404,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 55,
+                "loss": 2.0088260173797607,
+                "val_loss": 4.880401134490967,
+                "val_wer": 0.22,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 56,
+                "loss": 2.3358471393585205,
+                "val_loss": 4.904203414916992,
+                "val_wer": 0.21,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 57,
+                "loss": 2.2459399700164795,
+                "val_loss": 4.8764729499816895,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 58,
+                "loss": 1.8947744369506836,
+                "val_loss": 4.92652702331543,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 59,
+                "loss": 1.9542148113250732,
+                "val_loss": 4.914553165435791,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 60,
+                "loss": 1.6892844438552856,
+                "val_loss": 4.909337997436523,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 61,
+                "loss": 1.886260986328125,
+                "val_loss": 4.875606536865234,
+                "val_wer": 0.21,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 62,
+                "loss": 1.6726866960525513,
+                "val_loss": 4.884582996368408,
+                "val_wer": 0.21,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 63,
+                "loss": 1.831255555152893,
+                "val_loss": 4.9076972007751465,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 64,
+                "loss": 1.9563323259353638,
+                "val_loss": null,
+                "val_wer": 0.22,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 65,
+                "loss": 1.819286584854126,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 66,
+                "loss": 1.5868775844573975,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.999999873689376e-05
+            },
+            {
+                "epoch": 67,
+                "loss": 1.8303248882293701,
+                "val_loss": null,
+                "val_wer": 0.22,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 68,
+                "loss": 1.7039809226989746,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 69,
+                "loss": 1.493611454963684,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 70,
+                "loss": 1.7470701932907104,
+                "val_loss": null,
+                "val_wer": 0.20666666666666667,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 71,
+                "loss": 1.6974461078643799,
+                "val_loss": null,
+                "val_wer": 0.21,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 72,
+                "loss": 1.9918668270111084,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 73,
+                "loss": 1.8692277669906616,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 74,
+                "loss": 1.5330407619476318,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 75,
+                "loss": 1.6593152284622192,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 76,
+                "loss": 1.4409912824630737,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 77,
+                "loss": 1.950264573097229,
+                "val_loss": null,
+                "val_wer": 0.21,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 78,
+                "loss": 1.4825527667999268,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 79,
+                "loss": 1.7822487354278564,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 80,
+                "loss": 1.644487977027893,
+                "val_loss": null,
+                "val_wer": 0.21,
+                "lr": 1.4999999621068127e-05
+            },
+            {
+                "epoch": 81,
+                "loss": 1.5737788677215576,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 82,
+                "loss": 1.7735272645950317,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 83,
+                "loss": 1.717195987701416,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 84,
+                "loss": 1.529819369316101,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 85,
+                "loss": 1.749667763710022,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 86,
+                "loss": 1.6034654378890991,
+                "val_loss": null,
+                "val_wer": 0.22,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 87,
+                "loss": 1.7392528057098389,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 88,
+                "loss": 1.798583984375,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 89,
+                "loss": 1.6197352409362793,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 90,
+                "loss": 1.6391394138336182,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 4.499999704421498e-06
+            },
+            {
+                "epoch": 91,
+                "loss": 1.5916919708251953,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 1.349999934063817e-06
+            },
+            {
+                "epoch": 92,
+                "loss": 1.9348058700561523,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 1.349999934063817e-06
+            },
+            {
+                "epoch": 93,
+                "loss": 1.7642844915390015,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 1.349999934063817e-06
+            },
+            {
+                "epoch": 94,
+                "loss": 1.551417350769043,
+                "val_loss": null,
+                "val_wer": 0.22,
+                "lr": 1.349999934063817e-06
+            },
+            {
+                "epoch": 95,
+                "loss": 1.8008408546447754,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 1.349999934063817e-06
+            },
+            {
+                "epoch": 96,
+                "loss": 1.7973657846450806,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 97,
+                "loss": 2.0968592166900635,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 98,
+                "loss": 2.079890012741089,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 99,
+                "loss": 2.0081663131713867,
+                "val_loss": null,
+                "val_wer": 0.22,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 100,
+                "loss": 1.7035870552062988,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 101,
+                "loss": 1.881250262260437,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 102,
+                "loss": 1.8560891151428223,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 103,
+                "loss": 1.8866636753082275,
+                "val_loss": null,
+                "val_wer": 0.21,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 104,
+                "loss": 1.8086490631103516,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 105,
+                "loss": 2.1092171669006348,
+                "val_loss": null,
+                "val_wer": 0.20666666666666667,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 106,
+                "loss": 2.055722236633301,
+                "val_loss": null,
+                "val_wer": 0.22,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 107,
+                "loss": 2.00193190574646,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 108,
+                "loss": 1.729475975036621,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 109,
+                "loss": 2.4290201663970947,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 110,
+                "loss": 1.8988804817199707,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 111,
+                "loss": 1.713120698928833,
+                "val_loss": null,
+                "val_wer": 0.22333333333333333,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 112,
+                "loss": 2.0294675827026367,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 113,
+                "loss": 1.7247991561889648,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 114,
+                "loss": 2.0385637283325195,
+                "val_loss": null,
+                "val_wer": 0.21,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 115,
+                "loss": 2.1938178539276123,
+                "val_loss": null,
+                "val_wer": 0.21,
+                "lr": 9.999999974752427e-07
+            },
+            {
+                "epoch": 116,
+                "loss": 2.1042816638946533,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 3.000000106112566e-07
+            },
+            {
+                "epoch": 117,
+                "loss": 1.9276080131530762,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 3.000000106112566e-07
+            },
+            {
+                "epoch": 118,
+                "loss": 1.6922991275787354,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 3.000000106112566e-07
+            },
+            {
+                "epoch": 119,
+                "loss": 2.0754613876342773,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 3.000000106112566e-07
+            },
+            {
+                "epoch": 120,
+                "loss": 1.996691346168518,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 3.000000106112566e-07
+            },
+            {
+                "epoch": 121,
+                "loss": 1.9903812408447266,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 3.000000106112566e-07
+            },
+            {
+                "epoch": 122,
+                "loss": 1.9844050407409668,
+                "val_loss": null,
+                "val_wer": 0.21333333333333335,
+                "lr": 3.000000106112566e-07
+            },
+            {
+                "epoch": 123,
+                "loss": 1.965273141860962,
+                "val_loss": null,
+                "val_wer": 0.21666666666666667,
+                "lr": 3.000000106112566e-07
+            },
+            {
+                "epoch": 124,
+                "loss": 1.9686954021453857,
+                "val_loss": null,
+                "val_wer": 0.21,
+                "lr": 3.000000106112566e-07
+            }
+        ]
+    },
+    "prediction_examples_lzv_phase1": [
+        {
+            "ground_truth": "9   ļ o t i   s ē ņ o",
+            "prediction": "9   ļ o t i   s ē ņ o"
+        },
+        {
+            "ground_truth": "č u k   č u k",
+            "prediction": "č u k   č u"
+        },
+        {
+            "ground_truth": "10   t a g a d",
+            "prediction": "10   t a g a d"
+        },
+        {
+            "ground_truth": "v a i   t ā p ā t",
+            "prediction": "v a i   t ā p ā a t  "
+        },
+        {
+            "ground_truth": "1",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "c",
+            "prediction": "c"
+        },
+        {
+            "ground_truth": "l a b i   g a n   t ā",
+            "prediction": "l a b i g a n t"
+        },
+        {
+            "ground_truth": "m",
+            "prediction": "m"
+        },
+        {
+            "ground_truth": "9",
+            "prediction": "9"
+        },
+        {
+            "ground_truth": "d i v i",
+            "prediction": "d i v i"
+        },
+        {
+            "ground_truth": "s p ē l ē   ģ i t ā r u",
+            "prediction": "s p ē l ē   ģ i t ā r u"
+        },
+        {
+            "ground_truth": "9 8 7",
+            "prediction": "8"
+        },
+        {
+            "ground_truth": "k ā   t e v i   s a u c",
+            "prediction": "k a   r t e h v i s a u c"
+        },
+        {
+            "ground_truth": "l a b i",
+            "prediction": "l a b i"
+        },
+        {
+            "ground_truth": "o",
+            "prediction": "0"
+        },
+        {
+            "ground_truth": "a ā b c č d e ē f g ģ",
+            "prediction": "a d"
+        },
+        {
+            "ground_truth": "m",
+            "prediction": "n"
+        },
+        {
+            "ground_truth": "g a r d i",
+            "prediction": "g a r a i"
+        },
+        {
+            "ground_truth": "ū d e n s",
+            "prediction": "ū d n s"
+        },
+        {
+            "ground_truth": "s p i e ž",
+            "prediction": "s p i ž"
+        },
+        {
+            "ground_truth": "n",
+            "prediction": "ņ"
+        },
+        {
+            "ground_truth": "l i e n e",
+            "prediction": "l i n e"
+        },
+        {
+            "ground_truth": "m o h i t o",
+            "prediction": "m o h i t o"
+        },
+        {
+            "ground_truth": "d",
+            "prediction": "d"
+        },
+        {
+            "ground_truth": "5",
+            "prediction": "5"
+        },
+        {
+            "ground_truth": "e",
+            "prediction": "e"
+        },
+        {
+            "ground_truth": "ļ o d z ī t",
+            "prediction": "ļ o d z ī t"
+        },
+        {
+            "ground_truth": "3",
+            "prediction": "2"
+        },
+        {
+            "ground_truth": "d i e n a",
+            "prediction": "n i n a"
+        },
+        {
+            "ground_truth": "l u ņ ķ i s",
+            "prediction": "l u ņ ķ i s"
+        },
+        {
+            "ground_truth": "f 7 f 7 f 7",
+            "prediction": "f 8 f 8"
+        },
+        {
+            "ground_truth": "0 4 0 4",
+            "prediction": "0 0 4"
+        },
+        {
+            "ground_truth": "k ā d ē ļ   s l i k t i",
+            "prediction": "k ā d ē l   s l i k t i"
+        },
+        {
+            "ground_truth": "t a v ā   ē d i e n ā",
+            "prediction": "t a v ā     ē d i e n ā"
+        },
+        {
+            "ground_truth": "ļ o t i   m ī ļ i",
+            "prediction": "ļ o t i   m ī l i"
+        },
+        {
+            "ground_truth": "a",
+            "prediction": "a"
+        },
+        {
+            "ground_truth": "l a b i   g a n   k a   t ā",
+            "prediction": "l a b i g a n k a   t ā"
+        },
+        {
+            "ground_truth": "m a n s",
+            "prediction": "m a n s"
+        },
+        {
+            "ground_truth": "h",
+            "prediction": "h"
+        },
+        {
+            "ground_truth": "k ā d ē ļ   s l i k t i",
+            "prediction": "k ā d ē l   s l i k t i"
+        },
+        {
+            "ground_truth": "1",
+            "prediction": "1 1"
+        },
+        {
+            "ground_truth": "i z b r ī n a",
+            "prediction": "i z b r i n a  "
+        },
+        {
+            "ground_truth": "ģ h i ī j k ķ l ļ",
+            "prediction": "h i j k ķ ļ"
+        },
+        {
+            "ground_truth": "ē",
+            "prediction": "e"
+        },
+        {
+            "ground_truth": "5 6 5 6",
+            "prediction": "5 5"
+        },
+        {
+            "ground_truth": "0 1 0 1 2 3 4 5 0",
+            "prediction": "0 1 0 1 2 3 4 0"
+        },
+        {
+            "ground_truth": "i",
+            "prediction": "j"
+        },
+        {
+            "ground_truth": "ē",
+            "prediction": "e"
+        },
+        {
+            "ground_truth": "p",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "a n a",
+            "prediction": "a n a"
+        },
+        {
+            "ground_truth": "7 8 7 6 7 8",
+            "prediction": "8 6   8"
+        },
+        {
+            "ground_truth": "s",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "k ā d ā s   v i e t ā s",
+            "prediction": "k ā d ā s   v i e t ā s"
+        },
+        {
+            "ground_truth": "5 4 3 2 1",
+            "prediction": "4 1"
+        },
+        {
+            "ground_truth": "10",
+            "prediction": "10"
+        },
+        {
+            "ground_truth": "l u ņ ķ i s",
+            "prediction": "l u ņ ķ i s"
+        },
+        {
+            "ground_truth": "c",
+            "prediction": "c"
+        },
+        {
+            "ground_truth": "8",
+            "prediction": "8"
+        },
+        {
+            "ground_truth": "10   t a g a d",
+            "prediction": "10 t a g a"
+        },
+        {
+            "ground_truth": "o p r s š t u ū v z ž",
+            "prediction": "o p r s š t ū"
+        },
+        {
+            "ground_truth": "o",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "d a u d z",
+            "prediction": "d a u z"
+        },
+        {
+            "ground_truth": "b r ī n a",
+            "prediction": "b r ī n a"
+        },
+        {
+            "ground_truth": "f",
+            "prediction": "f"
+        }
+    ],
+    "prediction_examples_lzv_phase2": [
+        {
+            "ground_truth": "9   ļ o t i   s ē ņ o",
+            "prediction": "9   ļ o t i   s ē ņ o"
+        },
+        {
+            "ground_truth": "č u k   č u k",
+            "prediction": "č u k   č u"
+        },
+        {
+            "ground_truth": "10   t a g a d",
+            "prediction": "10   t a g a d"
+        },
+        {
+            "ground_truth": "v a i   t ā p ā t",
+            "prediction": "v a i   t ā p ā a t  "
+        },
+        {
+            "ground_truth": "1",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "c",
+            "prediction": "c"
+        },
+        {
+            "ground_truth": "l a b i   g a n   t ā",
+            "prediction": "l a b i g a n t"
+        },
+        {
+            "ground_truth": "m",
+            "prediction": "m"
+        },
+        {
+            "ground_truth": "9",
+            "prediction": "9"
+        },
+        {
+            "ground_truth": "d i v i",
+            "prediction": "d i v i"
+        },
+        {
+            "ground_truth": "s p ē l ē   ģ i t ā r u",
+            "prediction": "s p ē l ē   ģ i t ā r u"
+        },
+        {
+            "ground_truth": "9 8 7",
+            "prediction": "8"
+        },
+        {
+            "ground_truth": "k ā   t e v i   s a u c",
+            "prediction": "k a   r t e h v i s a u c"
+        },
+        {
+            "ground_truth": "l a b i",
+            "prediction": "l a b i"
+        },
+        {
+            "ground_truth": "o",
+            "prediction": "0"
+        },
+        {
+            "ground_truth": "a ā b c č d e ē f g ģ",
+            "prediction": "a d"
+        },
+        {
+            "ground_truth": "m",
+            "prediction": "n"
+        },
+        {
+            "ground_truth": "g a r d i",
+            "prediction": "g a r a i"
+        },
+        {
+            "ground_truth": "ū d e n s",
+            "prediction": "ū d n s"
+        },
+        {
+            "ground_truth": "s p i e ž",
+            "prediction": "s p i ž"
+        },
+        {
+            "ground_truth": "n",
+            "prediction": "ņ"
+        },
+        {
+            "ground_truth": "l i e n e",
+            "prediction": "l i n e"
+        },
+        {
+            "ground_truth": "m o h i t o",
+            "prediction": "m o h i t o"
+        },
+        {
+            "ground_truth": "d",
+            "prediction": "d"
+        },
+        {
+            "ground_truth": "5",
+            "prediction": "5"
+        },
+        {
+            "ground_truth": "e",
+            "prediction": "e"
+        },
+        {
+            "ground_truth": "ļ o d z ī t",
+            "prediction": "ļ o d z ī t"
+        },
+        {
+            "ground_truth": "3",
+            "prediction": "2"
+        },
+        {
+            "ground_truth": "d i e n a",
+            "prediction": "n i n a"
+        },
+        {
+            "ground_truth": "l u ņ ķ i s",
+            "prediction": "l u ņ ķ i s"
+        },
+        {
+            "ground_truth": "f 7 f 7 f 7",
+            "prediction": "f 8 f 8"
+        },
+        {
+            "ground_truth": "0 4 0 4",
+            "prediction": "0 0 4"
+        },
+        {
+            "ground_truth": "k ā d ē ļ   s l i k t i",
+            "prediction": "k ā d ē l   s l i k t i"
+        },
+        {
+            "ground_truth": "t a v ā   ē d i e n ā",
+            "prediction": "t a v ā     ē d i e n ā"
+        },
+        {
+            "ground_truth": "ļ o t i   m ī ļ i",
+            "prediction": "ļ o t i   m ī l i"
+        },
+        {
+            "ground_truth": "a",
+            "prediction": "a"
+        },
+        {
+            "ground_truth": "l a b i   g a n   k a   t ā",
+            "prediction": "l a b i g a n k a   t ā"
+        },
+        {
+            "ground_truth": "m a n s",
+            "prediction": "m a n s"
+        },
+        {
+            "ground_truth": "h",
+            "prediction": "h"
+        },
+        {
+            "ground_truth": "k ā d ē ļ   s l i k t i",
+            "prediction": "k ā d ē l   s l i k t i"
+        },
+        {
+            "ground_truth": "1",
+            "prediction": "1 1"
+        },
+        {
+            "ground_truth": "i z b r ī n a",
+            "prediction": "i z b r i n a  "
+        },
+        {
+            "ground_truth": "ģ h i ī j k ķ l ļ",
+            "prediction": "h i j k ķ ļ"
+        },
+        {
+            "ground_truth": "ē",
+            "prediction": "e"
+        },
+        {
+            "ground_truth": "5 6 5 6",
+            "prediction": "5 5"
+        },
+        {
+            "ground_truth": "0 1 0 1 2 3 4 5 0",
+            "prediction": "0 1 0 1 2 3 4 0"
+        },
+        {
+            "ground_truth": "i",
+            "prediction": "j"
+        },
+        {
+            "ground_truth": "ē",
+            "prediction": "e"
+        },
+        {
+            "ground_truth": "p",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "a n a",
+            "prediction": "a n a"
+        },
+        {
+            "ground_truth": "7 8 7 6 7 8",
+            "prediction": "8 6   8"
+        },
+        {
+            "ground_truth": "s",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "k ā d ā s   v i e t ā s",
+            "prediction": "k ā d ā s   v i e t ā s"
+        },
+        {
+            "ground_truth": "5 4 3 2 1",
+            "prediction": "4 1"
+        },
+        {
+            "ground_truth": "10",
+            "prediction": "10"
+        },
+        {
+            "ground_truth": "l u ņ ķ i s",
+            "prediction": "l u ņ ķ i s"
+        },
+        {
+            "ground_truth": "c",
+            "prediction": "c"
+        },
+        {
+            "ground_truth": "8",
+            "prediction": "8"
+        },
+        {
+            "ground_truth": "10   t a g a d",
+            "prediction": "10 t a g a"
+        },
+        {
+            "ground_truth": "o p r s š t u ū v z ž",
+            "prediction": "o p r s š t ū"
+        },
+        {
+            "ground_truth": "o",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "d a u d z",
+            "prediction": "d a u z"
+        },
+        {
+            "ground_truth": "b r ī n a",
+            "prediction": "b r ī n a"
+        },
+        {
+            "ground_truth": "f",
+            "prediction": "f"
+        }
+    ],
+    "prediction_examples_lzv_phase3": [
+        {
+            "ground_truth": "9   ļ o t i   s ē ņ o",
+            "prediction": "9   ļ o t i   s ē ņ o"
+        },
+        {
+            "ground_truth": "č u k   č u k",
+            "prediction": "č u k   č u"
+        },
+        {
+            "ground_truth": "10   t a g a d",
+            "prediction": "10   t a g a d"
+        },
+        {
+            "ground_truth": "v a i   t ā p ā t",
+            "prediction": "v a i   t ā p ā a t  "
+        },
+        {
+            "ground_truth": "1",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "c",
+            "prediction": "c"
+        },
+        {
+            "ground_truth": "l a b i   g a n   t ā",
+            "prediction": "l a b i g a n t"
+        },
+        {
+            "ground_truth": "m",
+            "prediction": "m"
+        },
+        {
+            "ground_truth": "9",
+            "prediction": "9"
+        },
+        {
+            "ground_truth": "d i v i",
+            "prediction": "d i v i"
+        },
+        {
+            "ground_truth": "s p ē l ē   ģ i t ā r u",
+            "prediction": "s p ē l ē   ģ i t ā r u"
+        },
+        {
+            "ground_truth": "9 8 7",
+            "prediction": "8"
+        },
+        {
+            "ground_truth": "k ā   t e v i   s a u c",
+            "prediction": "k a   r t e h v i s a u c"
+        },
+        {
+            "ground_truth": "l a b i",
+            "prediction": "l a b i"
+        },
+        {
+            "ground_truth": "o",
+            "prediction": "0"
+        },
+        {
+            "ground_truth": "a ā b c č d e ē f g ģ",
+            "prediction": "a d"
+        },
+        {
+            "ground_truth": "m",
+            "prediction": "n"
+        },
+        {
+            "ground_truth": "g a r d i",
+            "prediction": "g a r a i"
+        },
+        {
+            "ground_truth": "ū d e n s",
+            "prediction": "ū d n s"
+        },
+        {
+            "ground_truth": "s p i e ž",
+            "prediction": "s p i ž"
+        },
+        {
+            "ground_truth": "n",
+            "prediction": "ņ"
+        },
+        {
+            "ground_truth": "l i e n e",
+            "prediction": "l i n e"
+        },
+        {
+            "ground_truth": "m o h i t o",
+            "prediction": "m o h i t o"
+        },
+        {
+            "ground_truth": "d",
+            "prediction": "d"
+        },
+        {
+            "ground_truth": "5",
+            "prediction": "5"
+        },
+        {
+            "ground_truth": "e",
+            "prediction": "e"
+        },
+        {
+            "ground_truth": "ļ o d z ī t",
+            "prediction": "ļ o d z ī t"
+        },
+        {
+            "ground_truth": "3",
+            "prediction": "2"
+        },
+        {
+            "ground_truth": "d i e n a",
+            "prediction": "n i n a"
+        },
+        {
+            "ground_truth": "l u ņ ķ i s",
+            "prediction": "l u ņ ķ i s"
+        },
+        {
+            "ground_truth": "f 7 f 7 f 7",
+            "prediction": "f 8 f 8"
+        },
+        {
+            "ground_truth": "0 4 0 4",
+            "prediction": "0 0 4"
+        },
+        {
+            "ground_truth": "k ā d ē ļ   s l i k t i",
+            "prediction": "k ā d ē l   s l i k t i"
+        },
+        {
+            "ground_truth": "t a v ā   ē d i e n ā",
+            "prediction": "t a v ā     ē d i e n ā"
+        },
+        {
+            "ground_truth": "ļ o t i   m ī ļ i",
+            "prediction": "ļ o t i   m ī l i"
+        },
+        {
+            "ground_truth": "a",
+            "prediction": "a"
+        },
+        {
+            "ground_truth": "l a b i   g a n   k a   t ā",
+            "prediction": "l a b i g a n k a   t ā"
+        },
+        {
+            "ground_truth": "m a n s",
+            "prediction": "m a n s"
+        },
+        {
+            "ground_truth": "h",
+            "prediction": "h"
+        },
+        {
+            "ground_truth": "k ā d ē ļ   s l i k t i",
+            "prediction": "k ā d ē l   s l i k t i"
+        },
+        {
+            "ground_truth": "1",
+            "prediction": "1 1"
+        },
+        {
+            "ground_truth": "i z b r ī n a",
+            "prediction": "i z b r i n a  "
+        },
+        {
+            "ground_truth": "ģ h i ī j k ķ l ļ",
+            "prediction": "h i j k ķ ļ"
+        },
+        {
+            "ground_truth": "ē",
+            "prediction": "e"
+        },
+        {
+            "ground_truth": "5 6 5 6",
+            "prediction": "5 5"
+        },
+        {
+            "ground_truth": "0 1 0 1 2 3 4 5 0",
+            "prediction": "0 1 0 1 2 3 4 0"
+        },
+        {
+            "ground_truth": "i",
+            "prediction": "j"
+        },
+        {
+            "ground_truth": "ē",
+            "prediction": "e"
+        },
+        {
+            "ground_truth": "p",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "a n a",
+            "prediction": "a n a"
+        },
+        {
+            "ground_truth": "7 8 7 6 7 8",
+            "prediction": "8 6   8"
+        },
+        {
+            "ground_truth": "s",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "k ā d ā s   v i e t ā s",
+            "prediction": "k ā d ā s   v i e t ā s"
+        },
+        {
+            "ground_truth": "5 4 3 2 1",
+            "prediction": "4 1"
+        },
+        {
+            "ground_truth": "10",
+            "prediction": "10"
+        },
+        {
+            "ground_truth": "l u ņ ķ i s",
+            "prediction": "l u ņ ķ i s"
+        },
+        {
+            "ground_truth": "c",
+            "prediction": "c"
+        },
+        {
+            "ground_truth": "8",
+            "prediction": "8"
+        },
+        {
+            "ground_truth": "10   t a g a d",
+            "prediction": "10 t a g a"
+        },
+        {
+            "ground_truth": "o p r s š t u ū v z ž",
+            "prediction": "o p r s š t ū"
+        },
+        {
+            "ground_truth": "o",
+            "prediction": "<empty_pred>"
+        },
+        {
+            "ground_truth": "d a u d z",
+            "prediction": "d a u z"
+        },
+        {
+            "ground_truth": "b r ī n a",
+            "prediction": "b r ī n a"
+        },
+        {
+            "ground_truth": "f",
+            "prediction": "f"
+        }
+    ],
+    "saved_files": {
+        "best_fine_tuned_training_checkpoint": "lzv_finetuned_model_best_exp1.keras",
+        "final_lzv_prediction_model": "lzv_prediction_model_final_exp1.keras",
+        "plot": "lzv_plot_exp1.png",
+        "experiment_data_json": "lzv_exp_data_1.json"
+    }
+}

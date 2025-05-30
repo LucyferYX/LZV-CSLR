@@ -1,0 +1,44 @@
+{
+    "dataset_name": "LZV",
+    "data_paths": {
+        "train_tfrecord": "training.tfrecord",
+        "validation_tfrecord": "validation.tfrecord",
+        "char_map": "char_map.json",
+        "training_stats_dir": "training_stats"
+    },
+    "num_classes": 45,
+    "num_classes_with_blank": 46,
+    "dataset_stats": {
+        "train_samples": 254,
+        "val_samples": 64,
+        "total_samples": 318
+    },
+    "landmark_info": {
+        "source_tool": "MediaPipe Holistic",
+        "num_landmarks": 543,
+        "num_coordinates": 3,
+        "input_shape": [
+            null,
+            543,
+            3
+        ],
+        "landmark_components": {
+            "pose": [
+                0,
+                32
+            ],
+            "face": [
+                33,
+                500
+            ],
+            "lhand": [
+                501,
+                521
+            ],
+            "rhand": [
+                522,
+                542
+            ]
+        }
+    }
+}
