@@ -40,7 +40,7 @@ Modeļa apmācībai ir nepieciešams sagatavot training.tfrecord un validation.t
 3. Grāmatiņa veiks training.tfrecord un validation.tfrecord izveidi, no saglabātajiem datiem, kas atrodas `data/processed_landmarks/training_landmarks` mapītē.
 
 
-## Modeļa Apmācība
+## Modeļa apmācība
 
 1.  Sagatvojiet training.tfrecord un validation.tfrecord ar `code/preprocess_landmarks.ipynb`.
 2.  Atveriet un palaidiet Jupyter grāmatiņu `code/train_42.ipynb`.
