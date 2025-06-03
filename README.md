@@ -15,7 +15,7 @@ Bakalaura darbā sagatavotie .tfrecord faili nav pieejami, jo to izmērs pārsni
 - Kodu training.tfrecord un validation.tfrecord izveidošanai (`preprocess_landmarks.ipynb`)
 - LZV vārdnīcu (`char_map.json`)
 - LZV metadatu failu (`dataset_info.json`)
-- ASL metadatu, trenēšanas un minējumu veikšanas modeļus 543, 75 un 42 orientieru grupām (atrodas zem `models\asl`)
+- ASL metadatu, trenēšanas un minējumu veikšanas modeļus 543, 75 un 42 orientieru grupām (atrodas zem `models/asl`)
 - Piemēru gatavam LZV modelim
 
 ## Versijas
@@ -34,7 +34,7 @@ Bakalaura darbā sagatavotie .tfrecord faili nav pieejami, jo to izmērs pārsni
 
 Modeļa apmācībai ir nepieciešams sagatavot training.tfrecord un validation.tfrecord.
 1. Sagatavojiet Jums vēlamo daudzumu `.npy` formātā saglabātus orientieru masīvus, kas iegūts no video materiāliem.
-2. Atveriet un palaidiet Jupyter grāmatiņu `code\preprocess_landmarks.ipynb`.
+2. Atveriet un palaidiet Jupyter grāmatiņu `code/preprocess_landmarks.ipynb`.
 3. Grāmatiņa veiks training.tfrecord un validation.tfrecord izveidi, no saglabātajiem datiem, kas atrodas `data/processed_landmarks/training_landmarks` mapītē.
 
 
