@@ -11,13 +11,11 @@ Bakalaura darbā sagatavotie .tfrecord faili nav pieejami, jo to izmērs pārsni
 
 ## Projekts satur
 
-- Kodu modeļa apmācībai (train_42.ipynb)
-- Kodu training.tfrecord un validation.tfrecord izveidošanai (preprocess_landmarks.ipynb)
-- Vārdnīcu (char_map.json)
-- Metadatu failu (dataset_info.json)
-- ASL metadata failu (clsr_data_42.json)
-- ASL trenēšanas modeli (cslr_model_best_42.keras)
-- ASL minējumu veikšanas modeli (cslr_prediction_model_final_42.keras)
+- Kodu modeļa apmācībai (`train_42.ipynb`)
+- Kodu training.tfrecord un validation.tfrecord izveidošanai (`preprocess_landmarks.ipynb`)
+- LZV vārdnīcu (`char_map.json`)
+- LZV metadatu failu (`dataset_info.json`)
+- ASL metadatu, trenēšanas un minējumu veikšanas modeļus 543, 75 un 42 orientieru grupām (atrodas zem `models\asl`)
 - Piemēru gatavam LZV modelim
 
 ## Versijas
