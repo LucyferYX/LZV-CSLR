@@ -11,8 +11,8 @@ Bakalaura darbā sagatavotie .tfrecord faili nav pieejami, jo to izmērs pārsni
 
 ## Projekts satur
 
-- Kodu modeļa apmācībai (test_42.ipynb)
-- Kodu training.tfrecord un validation.tfrecord izveidošanai
+- Kodu modeļa apmācībai (train_42.ipynb)
+- Kodu training.tfrecord un validation.tfrecord izveidošanai (preprocess_landmarks.ipynb)
 - Vārdnīcu (char_map.json)
 - Metadatu failu (dataset_info.json)
 - ASL metadata failu (clsr_data_42.json)
@@ -40,7 +40,7 @@ Modeļa apmācībai ir nepieciešams sagatavot training.tfrecord un validation.t
 3. Grāmatiņa veiks training.tfrecord un validation.tfrecord izveidi, no saglabātajiem datiem, kas atrodas `data/processed_landmarks/training_landmarks` mapītē.
 
 
-## Modeļa Apmācība
+## Modeļa apmācība
 
 1.  Sagatvojiet training.tfrecord un validation.tfrecord ar `code/preprocess_landmarks.ipynb`.
 2.  Atveriet un palaidiet Jupyter grāmatiņu `code/train_42.ipynb`.
