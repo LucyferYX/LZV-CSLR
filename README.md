@@ -1,6 +1,6 @@
 # LZV-CSLR
 
-Šis repo satur kodu un resursus nepātrauktas zīmju valodas atpazīšanas (CSLR) modeļa apmācībai latviešu zīmju valodai (LZV), izmantojot pārneses mācīšanās (transfer learning) pieeju. Modelis tiek apmācīts, balstoties uz iepriekš trenētu amerikāņu zīmju valodas (ASL) modeli, kas izmanto ar MediaPipe Holistic ietvaru iegūtus 42 roku orientierus (landmarks).
+Šis repozitorijs satur kodu un resursus nepātrauktas zīmju valodas atpazīšanas (CSLR) modeļa apmācībai latviešu zīmju valodai (LZV), izmantojot pārneses mācīšanās (transfer learning) pieeju. Modelis tiek apmācīts, balstoties uz iepriekš trenētu amerikāņu zīmju valodas (ASL) modeli, kas izmanto ar MediaPipe Holistic ietvaru iegūtus 42 roku orientierus (landmarks).
 
 Šis repo satur tikai ļoti mazu daļu no bakalaura darbā paveiktā un izveidotā, tas ir domāts metodikas pārskatei.
 Ja mērķis ir eksperimentus atkārtot, ir nepieciešams sagatavot savu korpusu (t.i. sagatavot zīmju valodas lietojuma video materiālus un iegūt MediaPipe orientierus).
